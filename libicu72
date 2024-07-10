@@ -1,0 +1,6 @@
+"Section: misc
+Priority: optional
+Package: libicu72
+Provides: libicu74
+Architecture: all
+Description: Dummy package for PowerShell"

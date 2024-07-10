@@ -24,7 +24,6 @@ RUN chmod 644 /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update
 RUN apt-get -y install kubectl
 
-
 RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip \
     && unzip -q /tmp/awscliv2.zip -d /opt \
     && /opt/aws/install --update -i /usr/local/aws-cli -b /usr/local/bin \
@@ -33,6 +32,33 @@ RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscli
     && aws --version
 
 #RUN tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+#RUN apt install -y equivs
+#RUN equivs-control libicu72
+#COPY . /app
+#RUN equivs-build libicu72
+#RUN dpkg -i libicu72_1.0_all.deb
+
+RUN apt-get -y install wget
+
+RUN wget https://mirror.it.ubc.ca/ubuntu/pool/main/i/icu/libicu72_72.1-3ubuntu3_amd64.deb
+RUN dpkg -i libicu72_72.1-3ubuntu3_amd64.deb
+RUN apt-get install -f
+
+#RUN apt-get ca-certificates less ncurses-terminfo-base krb5-libs libgcc libintl libssl3 libstdc++ tzdata userspace-rcu zlib 
+#RUN  apt-get -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache lttng-ust
+#RUN apt-get -y install libicu74 wget
+
+RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb
+RUN dpkg -i powershell_7.4.3-1.deb_amd64.deb
+RUN apt-get install -f
+
+# Delete the downloaded package file
+#RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb -o /tmp/powershell.tar.gz
+#RUN rm powershell_7.4.3-1.deb_amd64.deb
+#RUN mkdir -p /opt/microsoft/powershell/7
+#RUN tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
+#RUN chmod +x /opt/microsoft/powershell/7/pwsh
+#RUN ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
 
 #ARG POWERSHELL_VERSION=7.2.11
